@@ -19,6 +19,15 @@ namespace MySnake
             HorizontalLine line = new HorizontalLine(5, 10, 8, '+');
             line.Drow();
 
+            VerticalLine vline = new VerticalLine(10, 9, 15, '*');
+            vline.Drow();
+
+            HorizontalLine line1 = new HorizontalLine(11, 20, 15, '+');
+            line1.Drow();
+
+            VerticalLine vline1 = new VerticalLine(20, 9, 15, '*');
+            vline1.Drow();
+
             Console.ReadLine();
         }
     }
