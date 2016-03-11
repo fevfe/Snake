@@ -24,13 +24,15 @@ namespace MySnake
 
         internal void Move()
         {
-            Point tail = pList.First();
-            pList.Remove(tail);
+            Point tail = pList.First();            
             Point head = GetNextPoint();
-            pList.Add(head);
-
-            tail.Clear();
-            head.Draw();
+            if (head.x < 78 & head.x > 0 & head.y < 24 & head.y > 0)
+            {
+                pList.Remove(tail);
+                pList.Add(head);
+                tail.Clear();
+                head.Draw();
+            }
         }
         public Point GetNextPoint()
         {
@@ -38,6 +40,18 @@ namespace MySnake
             Point nextPoint = new Point(head);
             nextPoint.Move(1, direction);
             return nextPoint;
+        }    
+
+        public void HandleKey(ConsoleKey key)
+        {
+            if (key == ConsoleKey.LeftArrow)
+                direction = Direction.LEFT;
+            else if (key == ConsoleKey.RightArrow)
+                direction = Direction.RIGHT;
+            else if (key == ConsoleKey.UpArrow)
+                direction = Direction.UP;
+            else if (key == ConsoleKey.DownArrow)
+                direction = Direction.DOWN;
         }
     }
 }
