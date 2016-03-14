@@ -13,6 +13,29 @@ namespace MySnake
         {
             Console.SetBufferSize(80, 25);
 
+            // Полиморфизм
+
+            VerticalLine vl = new VerticalLine(10, 0, 5, '%');
+            //Draw(vl);
+
+            Point p1 = new Point(10, 5, '*');
+            Figure fSnake = new Snake(p1, 6, Direction.RIGHT);
+            //Draw(fSnake);
+            Snake fs = (Snake)fSnake; // приведение типа (явное)
+            fs.Move();
+
+            HorizontalLine hl = new HorizontalLine(10, 16, 6, '&');
+
+            List<Figure> figures = new List<Figure>();
+            figures.Add(fs);
+            figures.Add(hl);
+            figures.Add(vl);
+
+            foreach(var f in figures)
+            {
+                f.Drow();
+            }
+
             // Отрисовка рамочки
             HorizontalLine upLine = new HorizontalLine(0, 78, 0, '+');
             HorizontalLine downLine = new HorizontalLine(0, 78, 24, '+');
@@ -55,5 +78,11 @@ namespace MySnake
                 }
             }
         }
+
+        static void Draw(Figure figure)
+        {
+            figure.Drow();
+        }
+
     }
 }

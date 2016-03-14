@@ -17,5 +17,13 @@ namespace MySnake
                 pList.Add(p);
             }
         }
+
+        public override void Drow() // альтернативная реализация метода из базового класса
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            base.Drow();                                   // вызов метода базового класса
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
     }
 }
