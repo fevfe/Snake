@@ -11,9 +11,14 @@ namespace MySnake
     {
         static void Main(string[] args)
         {
+            int mapWidth = 40;
+            int mapHight = 25;
             Console.SetBufferSize(80, 25);
 
-            // Полиморфизм
+            Walls walls = new Walls(mapWidth, mapHight);
+            walls.Draw();
+
+/*            // Полиморфизм
 
             VerticalLine vl = new VerticalLine(10, 0, 5, '%');
             //Draw(vl);
@@ -35,38 +40,44 @@ namespace MySnake
             {
                 f.Drow();
             }
-
-            // Отрисовка рамочки
-            HorizontalLine upLine = new HorizontalLine(0, 78, 0, '+');
-            HorizontalLine downLine = new HorizontalLine(0, 78, 24, '+');
-            VerticalLine leftLine = new VerticalLine(0, 0, 24, '+');
-            VerticalLine rightLine = new VerticalLine(78, 0, 24, '+');
+*/
+/*
             upLine.Drow();
             leftLine.Drow();
             downLine.Drow();
             rightLine.Drow();
-
+*/
             // Отрисовка точек
             Point p = new Point(4, 5, '*');
             Snake snake = new Snake(p, 4, Direction.RIGHT);
             snake.Drow();
 
-            FoodCreator foodCreator = new FoodCreator(80, 25, '$');
+            FoodCreator foodCreator = new FoodCreator(mapWidth, mapHight, '$');
             Point food = foodCreator.CreateFood();
             food.Draw();
 
             while(true)
             {
-                if (snake.Eat(food))
+                if(snake.IsHitTail())
                 {
-                    food = foodCreator.CreateFood();
-                    food.Draw();
+                    break;
                 }
-                else
+                if (walls.IsHit(snake))
                 {
-                    snake.Move();
+                    break;
                 }
 
+
+                    if (snake.Eat(food))
+                    {
+                        food = foodCreator.CreateFood();
+                        food.Draw();
+                    }
+                    else
+                    {
+                        snake.Move();
+                    }
+                
                 Thread.Sleep(200);
 
 

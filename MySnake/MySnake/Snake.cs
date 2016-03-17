@@ -8,6 +8,7 @@ namespace MySnake
 {
     class Snake : Figure
     {
+        int mapWidth = 40;
         Direction direction;
 
         public Snake(Point tail, int length, Direction _direction)
@@ -26,7 +27,7 @@ namespace MySnake
         {
             Point tail = pList.First();            
             Point head = GetNextPoint();
-            if (head.x < 78 & head.x > 0 & head.y < 24 & head.y > 0)
+//            if (head.x < mapWidth - 2 & head.x > 0 & head.y < 24 & head.y > 0)
             {
                 pList.Remove(tail);
                 pList.Add(head);
@@ -41,6 +42,17 @@ namespace MySnake
             nextPoint.Move(1, direction);
             return nextPoint;
         }    
+
+        internal bool IsHitTail()
+        {
+            var head = pList.Last();
+            for(int i = 0; i < pList.Count - 2; i++)
+            {
+                if (head.IsHit(pList[i]))
+                    return true;
+            }
+            return false;
+        }
 
         public void HandleKey(ConsoleKey key)
         {
